@@ -4,7 +4,6 @@ Junquan Chen | Moderator: Jiawei Tang (jiaweit2)
 This is a mobile app about presenting Reddit users' opinions towards movies for CS242
 
 ## Abstract
----
 ### project purpose
 Through the movie reviews/comments by Reddit users, we can analyze how the movie is accepted by the audiences.
 
@@ -13,7 +12,6 @@ Through the movie reviews/comments by Reddit users, we can analyze how the movie
 - Comments from social media are realatively easy to understand, so I decide to make an analyzer that can rate the movie based on the reviews from audience on social media.
 
 ## Technical Specification
----
 - **Platform**: Cross-Platform app (React Native)
 - **Programming Languages**: Python, JavaScript
 - **Stylistic Conventions**: CS242 JavaScript Styling Convention
@@ -23,7 +21,6 @@ Through the movie reviews/comments by Reddit users, we can analyze how the movie
 - Target Audience: Anyone
 
 ## Functional Specifications
----
 ### Features
 - Users can search for any movie with prompt
 - Users can check the score of their favorite movie.
@@ -33,7 +30,6 @@ Through the movie reviews/comments by Reddit users, we can analyze how the movie
 - N/A
 
 ## Brief Timeline
----
 - **Week1**: 
 1. Setting up initial website template
 1. Design the data flow of the app
@@ -71,7 +67,6 @@ Through the movie reviews/comments by Reddit users, we can analyze how the movie
 
 
 ## Rubrics
----
 ### Week1
 | Category | Total score Allocated | Detailed Rubrics |
 |:---:|:---:|---|
