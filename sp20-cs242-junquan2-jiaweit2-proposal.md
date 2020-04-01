@@ -91,12 +91,4 @@ Through the movie reviews/comments by Reddit users, we can analyze how the movie
 |  Function - Movie info page | 4  | 0: Didn't implement anything<br>  2: Interact with our own API to display reviews and scores on this page<br> 4: Each displayed review is linked to correct corresponding page |
 | Function - Account page | 4 | 0: Didn't implement anything<br>  2: Allow users to view their account info, change avatar and check for favorite moviews<br> 4: Allow users to modify their account infomation including name, email, bio and password |
 | Function - Scoring Algorithm| 4 | 0: Didn't implement anything<br> 2: Train the model & implement sentiment analysis on the fetched data to give score<br> 4:present the score |
-| Testing - Manual  |  10 | 0: Didn't implement anything<br> 10: Test manual covering all features, have 10+pages in total|
-
-### Week4
-| Category | Total score Allocated | Detailed Rubrics |
-|:---:|:---:|---|
-| Function - Home page for users | 5 | 0: Didn't implement anything<br>  2.5: Create Home page for users that shows their favorite movies score<br> 5: develop evaluation matrics to give scores|
-| Function - Home page for guests | 5 | 0: Didn't implement anything<br> 2.5: Create Home page for guests that show the the movies with top scores<br> 5: Find out the most related and useful reviews to show|
-| Function - design | 5 | 0: Bad design<br> 5.Good design that is endorsed by friends and beta users |
 | Testing - Manual  |  10 | 0: Didn't implement anything<br> 5: Test manual covering all features, have 10+pages in total<br> 10: All functions can be used and are functioning on mobile device|
