@@ -1,0 +1,24 @@
+{
+               "user_name": "junquan",
+               "pwd": "1234",
+               "avatar_uri": "file:///Users/mike/Library/Developer/CoreSimulator/Devices/4CD24DF4-CD8C-4CAB-9D95-DA606CFB0F8D/data/Containers/Data/Application/4B7C0384-8FEF-41F7-A430-4B9BA6ECF67A/Library/Caches/ExponentExperienceData/%2540anonymous%252FmovieAnalyzer-852b443e-a7a7-4b24-8bca-96c36980ef1a/ImagePicker/9C2738A2-5662-4BB7-BE17-B850614138A0.jpg",
+               "email": "junqaun2@illinois.edu",
+               "bio": "i'm new",
+               "name": "Junquan",
+               "favs": [
+                    {
+                         "name" : "Inception",
+                         "img_url" : "/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg",
+                         "desp": "Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life as payment for a task considered to be impossible: inception, the implantation of another person's idea into a target's subconscious.",
+                         "score": 83,
+                         "isfav": true
+                    },
+                    {
+                         "name" : "The Shape of Water",
+                         "img_url" : "/dasdgtrw.jpg",
+                         "desp": "Elisa is a mute, isolated woman who works as a cleaning lady in a hidden, high-security government laboratory in 1962 Baltimore.",
+                         "score": 72,
+                         "isfav": true
+                    }
+               ]
+}
