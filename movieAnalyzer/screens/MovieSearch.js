@@ -14,10 +14,16 @@ import {
   Text,
   Animated,
   ScrollView,
+  TouchableHighlight,
 } from 'react-native';
+
 const { width, height } = Dimensions.get('window');
 const axios = require('axios');
+const CancelToken = axios.CancelToken;
 const paddingAnimation = new Animated.Value(0.25 * height);
+const image_url_base = "http://image.tmdb.org/t/p/w185";
+const key = 'dd2663f90eea8915b4119abab4159ba6';
+var cancel = null;
 export default class MovieSearch extends Component {
 
   constructor(props) {
@@ -34,30 +40,62 @@ export default class MovieSearch extends Component {
     });
   }
 
-  search(input) {
-    if (input.length > 0) {
-      this.state.paddingTo = 40;
-    } else {
-      this.state.paddingTo = 0.25 * height;
+  async search() {
+    if (cancel != null) {
+      cancel();
+      cancel = null;
     }
-    this.setState({
-      input: input,
-    });
+    if (this.state.input.length > 0) {
+      this.state.paddingTo = 40;
+      await axios.get("https://api.themoviedb.org/3/search/movie?api_key=" + key + "&query=" + this.state.input, {
+        cancelToken: new CancelToken(function executor(c) {
+          // An executor function receives a cancel function as a parameter
+          cancel = c;
+        })
+      }).then((res) => {
+        let data = res.data.results;
+        cancel = null;
+        this.setState({
+          data: data,
+        })
+      }).catch(function (thrown) {
+        if (axios.isCancel(thrown)) {
+          console.log("Request cancelled.");
+        }
+      });
+    } else {
+      this.setState({
+        data: [],
+        paddingTo: 0.25 * height
+      });
+    }
   }
-
-  findReview(input) { }
 
   render() {
     if (this.state.input.length > 0) {
       rows = [];
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < this.state.data.length; i++) {
+        if (this.state.data[i].release_date) {
+          year = "(" + this.state.data[i].release_date.split("-")[0] + ")";
+        } else {
+          year = ""
+        }
         row =
-          <View key={i} style={styles.row}>
-            <Image key={i + 2 * 40} style={styles.movieImg} source={{ uri: 'https://facebook.github.io/react-native/img/tiny_logo.png' }} />
-            <View key={i + 3 * 40} style={styles.movies}>
-              <Text key={i + 4 * 40} style={styles.movieName}>{"movie" + i}</Text>
+          <TouchableHighlight key={i + 5 * this.state.data.length}
+            onPress={() => {
+              this.props.navigation.navigate("Movie", {
+                name: this.state.data[i].original_title,
+                img: this.state.data[i].poster_path,
+                desp: this.state.data[i].overview,
+              })
+            }}>
+            <View key={i} style={styles.row} >
+              <Image key={i + 2 * this.state.data.length} style={styles.movieImg} source={{ uri: image_url_base + this.state.data[i].poster_path }} />
+              <View key={i + 3 * this.state.data.length} style={styles.movies}>
+                <Text key={i + 4 * this.state.data.length} style={styles.movieName}>{this.state.data[i].original_title + year}</Text>
+              </View>
             </View>
-          </View>;
+          </TouchableHighlight>;
         rows.push(row);
       }
       if (rows.length == 0) {
@@ -70,7 +108,7 @@ export default class MovieSearch extends Component {
     } else {
       this.state.table = null;
     }
-    Animated.timing(paddingAnimation, { toValue: this.state.paddingTo, duration: 1000 }).start();
+    Animated.timing(paddingAnimation, { toValue: this.state.paddingTo, duration: 500 }).start();
 
     return (
       <LinearGradient colors={['#555555', '#303030', '#101010']} style={styles.container}>
@@ -89,7 +127,7 @@ export default class MovieSearch extends Component {
               autoCorrect={false}
               value={this.state.input}
               onSubmitEditing={null}
-              onChangeText={(input) => this.search(input)}
+              onChangeText={(input) => { this.setState({ input: input }); this.state.input = input; this.search(); }}
             />
           </Animated.View>
         </AnimatView>

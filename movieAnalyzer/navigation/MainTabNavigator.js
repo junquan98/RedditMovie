@@ -1,11 +1,13 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { Icon } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
 import TabBarIcon from '../components/TabBarIcon';
 import MovieSearch from '../screens/MovieSearch';
 import Favorite from '../screens/Favorite';
+import Movie from '../screens/Movie';
+
+import Library from '../screens/Library';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -15,38 +17,106 @@ const config = Platform.select({
 const MovieSearchStack = createStackNavigator(
   {
     MovieSearch: MovieSearch,
+    Movie: Movie
   },
   config
 );
 
-MovieSearchStack.navigationOptions = {
-  tabBarLabel: 'search',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon color={tintColor} name='search' />
-  ),
+MovieSearchStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible;
+  if (navigation.state.routes.length > 1) {
+    navigation.state.routes.map(route => {
+      if (route.routeName === "Movie") {
+        tabBarVisible = false;
+      } else {
+        tabBarVisible = true;
+      }
+    });
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'search',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon color={tintColor} name='search' size={23} />
+    ),
+  };
 };
+// MovieSearchStack.navigationOptions = {
+//   tabBarLabel: 'search',
+//   tabBarIcon: ({ tintColor }) => (
+//     <Icon color={tintColor} name='search' />
+//   ),
+// };
 
 MovieSearchStack.path = '';
 
 const FavoriteStack = createStackNavigator(
   {
     Favorite: Favorite,
+    Movie: Movie
   },
   config
 );
 
-FavoriteStack.navigationOptions = {
-  tabBarLabel: 'favorite',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon color={tintColor} name='favorite' />
-  ),
+FavoriteStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible;
+  if (navigation.state.routes.length > 1) {
+    navigation.state.routes.map(route => {
+      if (route.routeName === "Movie") {
+        tabBarVisible = false;
+      } else {
+        tabBarVisible = true;
+      }
+    });
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'favorite',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon color={tintColor} name='favorite' size={23} />
+    ),
+  };
 };
 
 FavoriteStack.path = '';
 
+const LibraryStack = createStackNavigator(
+  {
+    Library: Library,
+    Movie: Movie
+  },
+  config
+);
+
+LibraryStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible;
+  if (navigation.state.routes.length > 1) {
+    navigation.state.routes.map(route => {
+      if (route.routeName === "Movie") {
+        tabBarVisible = false;
+      } else {
+        tabBarVisible = true;
+      }
+    });
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'cinema',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon color={tintColor} name='movie' size={23} />
+    ),
+  };
+};
+
+LibraryStack.path = '';
+
 
 const tabNavigator = createBottomTabNavigator({
   MovieSearchStack,
+  LibraryStack,
   FavoriteStack,
 },
   {

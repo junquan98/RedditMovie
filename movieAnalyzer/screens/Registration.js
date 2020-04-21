@@ -21,7 +21,6 @@ import {
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 var {height, width} = Dimensions.get('window');
-
 const axios = require('axios');
 
 // Default class that represent the main components  in the
@@ -79,12 +78,12 @@ export default class Registration extends Component {
             );
             const db = mongoClient.db("app");
             const users = db.collection("movie_reviewer");
-            if(this.state.username==undefined || this.state.username.length == 0){
+            if(this.state.username==undefined || this.state.username.length == 0){ // check whether user has entered username
                 Alert.alert('Alert','Please enter user name',[
                     {text: 'OK'}
                     ])
             }else{
-                if(this.state.password==undefined || this.state.password.length == 0) {
+                if(this.state.password==undefined || this.state.password.length == 0) { // check whether user has entered password
                     Alert.alert('Alert','Please enter password',[
                         {text: 'OK'}
                         ])
@@ -92,15 +91,15 @@ export default class Registration extends Component {
                     users.find({user_name:this.state.username}).first().then((doc) => {
                         
                         if(doc == undefined){
-                            users.insertOne({user_name:this.state.username, pwd:this.state.password}).then(result => {
+                            users.insertOne({user_name:this.state.username, pwd:this.state.password}).then(result => { // no existed username in databse and create a new account 
                                 Alert.alert('Note','Successfully creat an Account',[
                                     {text: 'OK'}
                                     ])
-                                this.props.navigation.navigate('Login')
+                                this.props.navigation.navigate('Login') // navigate to login page after successfully creating the account
                             })    
                         }
                         else{
-                        Alert.alert('Alert','User name already exists',[
+                        Alert.alert('Alert','User name already exists',[ // user enters an username which is already existed
                             {text: 'OK'}
                             ])
                         }
@@ -111,7 +110,7 @@ export default class Registration extends Component {
         }}>
             <Text style={{color: '#fff'}}>Sign up</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{alignSelf:'center', marginTop:15}} onPress={()=>{
+        <TouchableOpacity style={{alignSelf:'center', marginTop:15}} onPress={()=>{ // a Back button to go back to the login page
             this.props.navigation.navigate('Login')
         }}>
             <Text style={{color: '#871614', fontSize:15}}>Back</Text>
@@ -120,8 +119,6 @@ export default class Registration extends Component {
     );
   }
 
-  componentDidMount() {
-  }
 
 }
 

@@ -14,6 +14,7 @@ class LoginScreen extends React.Component {
     }
   }
 
+  // check username and password validation 
   signin() {
     const stitchAppClient = Stitch.defaultAppClient;
     const mongoClient = stitchAppClient.getServiceClient(
@@ -22,17 +23,17 @@ class LoginScreen extends React.Component {
     );
     const db = mongoClient.db("app");
     const users = db.collection("movie_reviewer");
-    if (this.state.username == undefined || this.state.username.length == 0) {
+    if (this.state.username == undefined || this.state.username.length == 0) { // user haven't entered username
       Alert.alert('Alert', 'Please enter user name', [
         { text: 'OK' }
       ])
     } else {
-      if (this.state.password == undefined || this.state.password.length == 0) {
+      if (this.state.password == undefined || this.state.password.length == 0) { // user haven't entered password
         Alert.alert('Alert', 'Please enter password', [
           { text: 'OK' }
         ])
       } else {
-        users.find({ user_name: this.state.username }).first().then((doc) => {
+        users.find({ user_name: this.state.username }).first().then((doc) => { // user enters unexisted username
           if (doc == undefined) {
             Alert.alert('Alert', 'Incorrect username or password', [
               { text: 'OK' }
@@ -40,11 +41,11 @@ class LoginScreen extends React.Component {
           }
           else {
             if (this.state.password != doc.pwd) {
-              Alert.alert('Alert', 'Incorrect username or password', [
+              Alert.alert('Alert', 'Incorrect username or password', [ // user enter incorrect password
                 { text: 'OK' }
               ])
             } else {
-              AsyncStorage.setItem("username", this.state.username);
+              AsyncStorage.setItem("username", this.state.username); // authentication complete 
               this.props.navigation.navigate('Main')
             }
           }
@@ -87,7 +88,8 @@ class LoginScreen extends React.Component {
           <Text style={{ color: '#871614' }}>{'<Create new account>'}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btn} onPress={() => this.signin()}>
+        {/* check the authentication */}
+        <TouchableOpacity style={styles.btn} onPress={() => this.signin()}> 
           <Text style={{ color: '#fff' }}>Login</Text>
         </TouchableOpacity>
 
