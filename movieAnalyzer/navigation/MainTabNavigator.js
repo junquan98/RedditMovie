@@ -6,6 +6,9 @@ import TabBarIcon from '../components/TabBarIcon';
 import MovieSearch from '../screens/MovieSearch';
 import Favorite from '../screens/Favorite';
 import Movie from '../screens/Movie';
+import Setting from '../screens/Setting';
+import Edit from '../screens/EditAccount';
+
 
 import Library from '../screens/Library';
 
@@ -51,36 +54,36 @@ MovieSearchStack.navigationOptions = ({ navigation }) => {
 
 MovieSearchStack.path = '';
 
-const FavoriteStack = createStackNavigator(
-  {
-    Favorite: Favorite,
-    Movie: Movie
-  },
-  config
-);
+// const FavoriteStack = createStackNavigator(
+//   {
+//     Favorite: Favorite,
+//     Movie: Movie
+//   },
+//   config
+// );
 
-FavoriteStack.navigationOptions = ({ navigation }) => {
-  let tabBarVisible;
-  if (navigation.state.routes.length > 1) {
-    navigation.state.routes.map(route => {
-      if (route.routeName === "Movie") {
-        tabBarVisible = false;
-      } else {
-        tabBarVisible = true;
-      }
-    });
-  }
+// FavoriteStack.navigationOptions = ({ navigation }) => {
+//   let tabBarVisible;
+//   if (navigation.state.routes.length > 1) {
+//     navigation.state.routes.map(route => {
+//       if (route.routeName === "Movie") {
+//         tabBarVisible = false;
+//       } else {
+//         tabBarVisible = true;
+//       }
+//     });
+//   }
 
-  return {
-    tabBarVisible,
-    tabBarLabel: 'favorite',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon color={tintColor} name='favorite' size={23} />
-    ),
-  };
-};
+//   return {
+//     tabBarVisible,
+//     tabBarLabel: 'favorite',
+//     tabBarIcon: ({ tintColor }) => (
+//       <Icon color={tintColor} name='favorite' size={23} />
+//     ),
+//   };
+// };
 
-FavoriteStack.path = '';
+// FavoriteStack.path = '';
 
 const LibraryStack = createStackNavigator(
   {
@@ -114,10 +117,46 @@ LibraryStack.navigationOptions = ({ navigation }) => {
 LibraryStack.path = '';
 
 
+
+const SettingStack = createStackNavigator(
+  {
+    Setting: Setting,
+    Favorite: Favorite,
+    Movie: Movie,
+    Edit: Edit,
+  },
+  config
+);
+
+SettingStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible;
+  if (navigation.state.routes.length > 1) {
+    navigation.state.routes.map(route => {
+      if (route.routeName === "Movie" | route.routeName === "Favorite"| route.routeName === "Edit") {
+        tabBarVisible = false;
+      } else {
+        tabBarVisible = true;
+      }
+    });
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Account',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon color={tintColor} name='account-circle' size={23} />
+    ),
+  };
+};
+
+SettingStack.path = '';
+
+
+
 const tabNavigator = createBottomTabNavigator({
   MovieSearchStack,
   LibraryStack,
-  FavoriteStack,
+  SettingStack,
 },
   {
     tabBarOptions: {

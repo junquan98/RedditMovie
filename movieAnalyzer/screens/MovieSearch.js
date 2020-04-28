@@ -87,6 +87,7 @@ export default class MovieSearch extends Component {
                 name: this.state.data[i].original_title,
                 img: this.state.data[i].poster_path,
                 desp: this.state.data[i].overview,
+                isfav: null,
               })
             }}>
             <View key={i} style={styles.row} >
