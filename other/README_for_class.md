@@ -1,7 +1,6 @@
 # RedditMovie
 
-Junquan Chen | Moderator: Jiawei Tang (jiaweit2)
-This is a mobile app about presenting Reddit users' opinions towards movies for CS242
+This is a mobile app about presenting Reddit users' opinions towards movies
 
 ## Abstract
 ### project purpose
